@@ -40,7 +40,7 @@ sort: 1
       *info：要写入log的信息内容
   示例：
       getCurrentposition->getParameter(canidList, reg_min_app_position, MotorTypeHelper::REG_MIN_APP_POSITION, IDNUM);
-      for (int i = 0; i < 6; i++)
+      for (int i = 0; i < IDNUM; i++)
       {
             cout << "电机" << i << "最大负向位置: " << static_cast<int32_t>(reg_min_app_position[i]) << endl;
             sprintf(LogInfo, "电机%d最大正向位置: %d", i, static_cast<int32_t>(reg_min_app_position[i]));
@@ -57,7 +57,7 @@ sort: 1
   示例：
       login();
       getCurrentposition->getParameter(canidList, reg_min_app_position, MotorTypeHelper::REG_MIN_APP_POSITION, IDNUM);
-      for (int i = 0; i < 6; i++)
+      for (int i = 0; i < IDNUM; i++)
       {
             cout << "电机" << i << "最大负向位置: " << static_cast<int32_t>(reg_min_app_position[i]) << endl;
             sprintf(LogInfo, "电机%d最大正向位置: %d", i, static_cast<int32_t>(reg_min_app_position[i]));
@@ -74,7 +74,7 @@ sort: 1
   示例：
       login();
       getCurrentposition->getParameter(canidList, reg_min_app_position, MotorTypeHelper::REG_MIN_APP_POSITION, IDNUM);
-      for (int i = 0; i < 6; i++)
+      for (int i = 0; i < IDNUM; i++)
       {
             cout << "电机" << i << "最大负向位置: " << static_cast<int32_t>(reg_min_app_position[i]) << endl;
             sprintf(LogInfo, "电机%d最大正向位置: %d", i, static_cast<int32_t>(reg_min_app_position[i]));
@@ -172,7 +172,6 @@ sort: 1
      int main()
       {
           login();
-          mechanical_arm_origin();
           float arr[6]={2.3,3.2,2.2,0,0,0};
           joint_movement(arr);
           logout();
