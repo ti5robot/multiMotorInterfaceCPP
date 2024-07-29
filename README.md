@@ -139,7 +139,7 @@ sort: 1
       int main()
       {
            login();
-           int num = get_elektrische_Maschinen_status();
+           int num = get_elektrische_Maschinen_status(6);
            logout();
            return 0;
        }
@@ -148,7 +148,7 @@ sort: 1
   ```
   函数功能：清除电机错误
   返回值：无
-  参数：点击总个数
+  参数：电机总个数
   示例：
       int main()
       {
@@ -157,7 +157,7 @@ sort: 1
           {
               cout << "电机异常！" << endl;
           }
-          clear_elc_erro();
+          clear_elc_erro(6);
           logout();
           return 0;
        }
