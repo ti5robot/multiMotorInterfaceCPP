@@ -6,10 +6,10 @@ sort: 1
 
 机械臂控制的代码中，分别是`include`，`src`，`log`以及`usrlib`。
 
-+ [include](https://github.com/mrhouse-sweet/mechanical_arm_SDK-docs/tree/main/code/include) 存储着机械臂所需的头文件。
-+ [src](https://github.com/mrhouse-sweet/mechanical_arm_SDK-docs/tree/main/code/src) 一般控制机械臂的文件放在此处，其中`main.cpp`是一个示例程序。
-+ [log](https://github.com/mrhouse-sweet/mechanical_arm_SDK-docs/tree/main/code/log) sdk中存放log的文件夹。
-+ [usrlib](https://github.com/mrhouse-sweet/mechanical_arm_SDK-docs/tree/main/code/usrlib)包含SDK所需的so文件
++ include存储着机械臂所需的头文件。
++ src一般控制机械臂的文件放在此处，其中`main.cpp`是一个示例程序。
++ logsdk中存放log的文件夹。
++ usrlib包含SDK所需的so文件
 
 ## 1. include
 
