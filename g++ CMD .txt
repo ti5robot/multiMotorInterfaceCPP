@@ -1,3 +1,3 @@
 export CPLUS_INCLUDE_PATH=/mnt/hgfs/mechanical_arm_6_0/include:$CPLUS_INCLUDE_PATH
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/mnt/hgfs/mechanical_arm_6_0/include/can
-g++ main.cpp -L./include -lmylibti5_multi_motor -L../include/can -lmylibscan -lcontrolcan -o move_sov
+g++ main.cpp -L./include -lmylibti5_multi_motor -L../include/can -lmylibscan -lcontrolcan -o multi_motor
