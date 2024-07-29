@@ -27,8 +27,25 @@ sort: 1
   ```
   函数功能：动态分配内存
   返回值：true停止，false未停止
-  参数：无
-  示例：bool result=inspect_brake()
+  参数：动态分配内存长度
+  示例：
+      int main()
+      {
+          allocate_variable(6);
+
+          login();
+          cout << "登录成功" << endl;
+          get_elc_info(6);
+          int q = get_elektrische_Maschinen_status(6);
+          clear_elc_error(6);
+          set_elc_info(ampere, 0, MotorTypeHelper::REG_TARGET_CURRENT, 0);
+          TH.j[0]=1.2;
+          move_to_joint();
+          deallocate_variable();
+          logout();
+
+          return 0;
+      }
   ```
 
 + void writeDebugInfoToFile(const char *func_name, const char *info);
