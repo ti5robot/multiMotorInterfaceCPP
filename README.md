@@ -226,7 +226,7 @@ sort: 1
 
 最后执行`gcc.sh`文件进行编译或通过以下命令进行编译生成可执行文件`move_sov`。(注意：以下路径是默认路径，如果修改了路径要替换成自己的)
 ```
-g++ main.cpp  Ti5BASIC.cpp Ti5LOGIC.cpp  mathfunc.cpp  tool.cpp -L../include/can -lmylibscan -lcontrolcan -o multi_motor
+g++ main.cpp -L./include -lmylibti5_multi_motor -L../include/can -lmylibscan -lcontrolcan -o multi_motor
 ```
 **运行**:
 ```
