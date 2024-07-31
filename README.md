@@ -222,9 +222,17 @@ sort: 1
 
 该文件中的内容是编译命令，编译的时候可以使用该命令直接编译，也可以使用g++命令+对应参数直接编译
 
-### 2.3 编译
+### 2.3 依赖库安装
++ `将usrlib中的libcontrolcan.so  libmylibscan.so  libmylibti5_multi_motor.so文件拷贝到/usr/lib/下`
 
-最后执行`gcc.sh`文件进行编译或通过以下命令进行编译生成可执行文件`move_sov`。(注意：以下路径是默认路径，如果修改了路径要替换成自己的)
+```bash
+cd ~/multi_motor/usrlib
+sudo cp * /usr/lib
+```
+
+### 2.4 编译
+
+最后执行`gcc.sh`文件进行编译或通过以下命令进行编译生成可执行文件`multi_motor`。(注意：以下路径是默认路径，如果修改了路径要替换成自己的)
 ```
 export CPLUS_INCLUDE_PATH=/home/ti5robot/multi_motor/include:$CPLUS_INCLUDE_PATH
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/ti5robot/multi_motor/include/can
