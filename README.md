@@ -141,6 +141,16 @@ sort: 1
            return 0;
        }
    ```
+设置代码：
+<center>
+<img src="image/设置电机参数指令.png" style="zoom:10%" alt=" 图片不见了。。。 "/>
+<br>
+<div style="color:orange; border-bottom: 0.1px solid #d9d9d9;
+display: inline-block;
+color: #999;
+padding: 1px;"></div>
+</center>
+<br>
 
 + int get_elektrische_Maschinen_status(int size);
   ```
@@ -182,7 +192,7 @@ sort: 1
 
 + void joint_movement(const float *arr);
    ```
-  函数功能：机械臂关节运动
+  函数功能：电机运动
   返回值：无
   参数：各个关节值
   示例：
@@ -199,10 +209,7 @@ sort: 1
 
 ### 1.3 Ti5LOGIC.h
 
-该文件是机械臂的算法库
-使用方法：根据需求在规划机械臂运动的时候可以调用该库的函数。
-
-
+该文件是算法库，不需要使用。
 
 
 ### 1.4 tool.h
@@ -222,27 +229,23 @@ sort: 1
 
 该文件中的内容是编译命令，编译的时候可以使用该命令直接编译，也可以使用g++命令+对应参数直接编译
 
-### 2.3 编译
+### 2.3 依赖库安装
++ `将usrlib中的libcontrolcan.so  libmylibscan.so  libmylibti5_multi_motor.so文件拷贝到/usr/lib/下`
 
-最后执行`gcc.sh`文件进行编译或通过以下命令进行编译生成可执行文件`move_sov`。(注意：以下路径是默认路径，如果修改了路径要替换成自己的)
+```bash
+cd ~/multi_motor/usrlib
+sudo cp * /usr/lib
 ```
+
+### 2.4 编译
+
+最后执行`gcc.sh`文件进行编译或通过以下命令进行编译生成可执行文件`multi_motor`。(注意：以下路径是默认路径，如果修改了路径要替换成自己的)
+```
+export CPLUS_INCLUDE_PATH=/home/ti5robot/multi_motor/include:$CPLUS_INCLUDE_PATH
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/ti5robot/multi_motor/include/can
 g++ main.cpp -L./include -lmylibti5_multi_motor -L../include/can -lmylibscan -lcontrolcan -o multi_motor
 ```
 **运行**:
 ```
 sudo ./multi_motor
 ```
-注意机械臂处在一个安全的环境中
-
-## 开发须知
-（1）代码中一切角大小相关的量采用弧度制（bais由角度制自动转向弧度制）。
-
-（2）机械臂的一切控制基于robotArm类，传参方式为直接改变TH.j或TH.pos的值。
-
-（3）TH.j与TH.pos代表数学模型的理论值，需要借由bais校准到实际发送的理论值。
-
-（4）相邻两次指令发送时间低于USLEEPTIME可能信息堵塞。
-
-（5）由于电机内部的算法，指令发送的值与实际执行的值有微小误差。
-
-（6）位置环与速度环都是直接控制电机内圈，因此从外到内涉及scale的放缩。“位置环参数”单位为“步”，“速度环参数/100”单位为“圈/秒”。一圈65536步。
