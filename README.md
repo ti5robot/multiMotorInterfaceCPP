@@ -141,6 +141,16 @@ sort: 1
            return 0;
        }
    ```
+设置代码：
+<center>
+<img src="../img/设置电机参数指令.png" style="zoom:10%" alt=" 图片不见了。。。 "/>
+<br>
+<div style="color:orange; border-bottom: 0.1px solid #d9d9d9;
+display: inline-block;
+color: #999;
+padding: 1px;"></div>
+</center>
+<br>
 
 + int get_elektrische_Maschinen_status(int size);
   ```
