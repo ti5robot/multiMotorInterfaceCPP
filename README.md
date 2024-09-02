@@ -240,8 +240,8 @@ sudo cp * /usr/lib
 
 最后执行`gcc.sh`文件进行编译或通过以下命令进行编译生成可执行文件`multi_motor`。(注意：以下路径是默认路径，如果修改了路径要替换成自己的)
 ```
-export CPLUS_INCLUDE_PATH=~/multi_motor/include:$CPLUS_INCLUDE_PATH
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/multi_motor/include/can
+export CPLUS_INCLUDE_PATH=~/multiMotorInterfaceCPP/include:$CPLUS_INCLUDE_PATH
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/multiMotorInterfaceCPP/include/can
 g++ main.cpp -L./include -lmylibti5_multi_motor -L../include/can -lmylibscan -lcontrolcan -o multi_motor
 ```
 **运行**:
