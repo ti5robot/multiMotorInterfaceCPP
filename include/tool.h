@@ -9,7 +9,14 @@
 
 using namespace std;
 
-#define IDNUM 6
+// #define IDNUM 1
+
+extern int IDNUM;
+
+int getIDNUM();
+void setIDNUM(int newIDNUM);
+
+
 
 // extern "C"
 // { // 添加extern "C"
@@ -33,3 +40,4 @@ using namespace std;
 
 // } // 添加extern "C"
 #endif
+

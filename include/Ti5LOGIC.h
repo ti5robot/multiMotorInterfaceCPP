@@ -49,7 +49,17 @@ extern "C"
 
 	public:
 		int rc = 0;
-		float j[6] = {0, 0, 0, 0, 0, 0}; // 各关节值
+		
+		float *j;//各个关节值
+		pos_trans() {
+			int idnum = getIDNUM();  // 获取IDNUM值
+			j = new float[idnum];    // 动态分配数组
+    	}
+		~pos_trans() {
+        	delete[] j;  // 释放动态分配的内存
+    	}
+
+		// float j[idnum]; // 各关节值
 		float pos[6];					 // 末端动态位姿与初始位姿(x,y,z,yaw,pitch,roll)
 		float gap0, gap;
 		// 检测逆运动解出的角是否满足原始位姿
