@@ -14,6 +14,10 @@ using namespace std;
 extern int IDNUM;
 
 int getIDNUM();
+
+/*设置IDNUM
+*参数：newIDNUM - 新的IDNUM即电机个数
+*/
 void setIDNUM(int newIDNUM);
 
 
