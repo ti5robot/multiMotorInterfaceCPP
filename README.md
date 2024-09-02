@@ -140,17 +140,16 @@ sort: 1
            logout();
            return 0;
        }
+
+      下面是目标速度和目标位置的parameterType：
+        REG_TARGET_SPEED 设置目标速度  下发参数为： (目标转速（度每秒）*减速比*100)/360
+        REG_TARGET_POSITION 设置目标位置  下发参数为： (减速机目标角度/360)*减速比*65536
+       例如：
+        set_elc_info(reg_position_kp,5,MotorTypeHelper::REG_TARGET_SPEED, 目标转速);
+        set_elc_info(reg_position_kp,5,MotorTypeHelper::REG_TARGET_POSITION, 目标位置);
    ```
-设置代码：
-<center>
-<img src="image/设置电机参数指令.png" style="zoom:10%" alt=" 图片不见了。。。 "/>
-<br>
-<div style="color:orange; border-bottom: 0.1px solid #d9d9d9;
-display: inline-block;
-color: #999;
-padding: 1px;"></div>
-</center>
-<br>
+
+
 
 + int get_elektrische_Maschinen_status(int size);
   ```
