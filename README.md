@@ -214,6 +214,31 @@ sort: 1
 ### 1.4 tool.h
 
 该文件是一些`tool`，具体函数使用及参数请查看该文件。
++ void setIDNUM(int newIDNUM);
+```
+函数功能：设置IDNUM
+返回值：无
+参数：newIDNUM - 新的IDNUM即电机个数
+示例：
+  int main()
+{
+    setIDNUM(2);//两个IDNUM
+    cout<<"IDNUM="<<IDNUM<<endl;
+    allocate_variable(IDNUM);
+
+    if(login()){
+        cout<<"login success"<<endl;
+    }
+    float arr2[2]={2.2,2.2};
+    joint_movement(arr2);
+    deallocate_variable();
+    if(logout()){
+        cout<<"logout success"<<endl;
+    }
+
+    return 0;
+}
+```
 
 ### 1.5 can
 该文件夹包含`can`通讯的头文件，机械臂是通过can通讯与控制机联通的，具体函数功能及参数请查看里面所包含的文件中注释了解函数作用。
