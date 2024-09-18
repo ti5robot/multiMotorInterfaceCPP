@@ -27,8 +27,6 @@ public:
 
     virtual int get_motor_run_mode() = 0;  //获取运行模式
     virtual int get_reg_status() = 0;      //获取状态
-    virtual int get_reg_i_q()=0;       //获取电机电流
-    virtual int get_reg_i_q_ref()=0;   //获取电机目标电流
 
     virtual int get_current_position() = 0;  //获取当前位置
 
@@ -63,6 +61,17 @@ public:
     virtual int  get_reg_hardware_version() =0; //获取电机硬件版本号
 
     virtual std::vector<int>  getErrorInfos() =0;
+
+    virtual int  get_req_reduction_ratio() =0;//获取电机减速比
+    virtual int  get_req_kp() =0;//机器人扭矩比例增益
+    virtual int  get_req_kd() =0;//机器人扭矩微分增益
+    virtual int  get_req_kt() =0;//机器人电机扭矩常数
+
+    virtual int  set_req_reduction_ratio(int value)=0;//机器人减速比
+    virtual int  set_req_kp(float value)=0;//机器人力比例增益
+    virtual int  set_req_kd(float value)=0;//机器人力微分增益
+    virtual int  set_req_kt(float value)=0;//机器人电机扭矩常数
+    virtual int  set_req_position_desired(float value)=0;//机器人期望位置
 
     virtual int  set_reg_position_kp(int value) =0; //位置环比例
     virtual int  set_reg_position_kd(int value) =0; //位置环微分
@@ -102,7 +111,6 @@ public:
     virtual int stop() = 0; //停止启动
 
     virtual int request_reg_i_q() =0; //请求读取电流
-    virtual int request_reg_i_q_ref() =0; //请求读取电流
     virtual int request_reg_speed() =0; //请求读取电流
     virtual int request_reg_current_position() =0; //请求读取电流
     virtual int request_reg_status() =0; //请求读取电流
@@ -112,6 +120,7 @@ public:
 
 
     int getRegisterData()const {return registerData;}
+    float getReceiveData()const {return receiveData;}
     std::string getMotorModel()const {return motorModel;}
 
 protected:
@@ -119,6 +128,7 @@ protected:
     uint16_t canID = 0;
     uint16_t canIndex = 0;
     int registerData = 0;
+    float receiveData = 0;
     std::string motorModel;
 
 

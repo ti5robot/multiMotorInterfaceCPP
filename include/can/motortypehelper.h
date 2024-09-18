@@ -20,7 +20,6 @@ enum RequestType{
     MOTOR_RUN_MODE = 1,
 
     REG_I_Q,
-    REG_I_Q_REF,
     REG_SPEED,
     REG_CURRENT_POSITION,
     REG_STATUS,
@@ -55,6 +54,15 @@ enum RequestType{
     REG_HARDWARE_VERSION,
     REG_MOTOR_MODEL,
     REG_FAULT_CLEAR,
+    REQ_REDUCTION_RATIO,
+};
+
+enum RobotType{
+    REQ_KT=1,
+    REQ_KP,
+    REQ_KD,
+
+    REQ_POSITION_DESIRED,
 };
 }
 

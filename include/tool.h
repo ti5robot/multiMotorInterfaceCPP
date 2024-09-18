@@ -30,6 +30,7 @@ void setIDNUM(int newIDNUM);
     void copy_value(float *copy, float *paste, int n);
     void show_value(string name, float *value);
     void show_value(string name, uint32_t *value);
+    void show_value(string name, uint8_t *value);
     void show_point(string name, float *value);
 
     void get_cmdlist(uint8_t *L, uint8_t c);

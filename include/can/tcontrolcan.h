@@ -43,6 +43,13 @@
 #define	GET_REG_MOTOR_MODEL 100
 #define	GET_REG_HARDWARE_VERSION 101
 
+#define WRITE_REQ 32
+#define READ_REQ 64
+#define GS_REQ_REDUCTION_RATIO 65
+#define GS_REQ_KP 66
+#define GS_REQ_KD 68
+#define GS_REQ_KT 69
+#define SET_REQ_POSITION_DESIRED 90
 
 
 #define	SET_REG_TARGET_CURRENT	28
@@ -82,8 +89,6 @@ public:
 
     virtual int get_motor_run_mode() override;
     virtual int get_reg_status() override;
-    virtual int get_reg_i_q()override;
-    virtual int get_reg_i_q_ref()override;
 
     virtual int get_current_position() override;
 
@@ -119,11 +124,21 @@ public:
     virtual int  get_status() override;
     virtual std::vector<int>  getErrorInfos() override;
 
+    virtual int  get_req_reduction_ratio()override;
+    virtual int  get_req_kp()override;
+    virtual int  get_req_kt()override;
+     virtual int  get_req_kd()override;
+    virtual int  set_req_reduction_ratio(int value)override;
+    virtual int  set_req_kp(float value)override;
+    virtual int  set_req_kd(float value)override;
+    virtual int  set_req_kt(float value)override;
+    virtual int  set_req_position_desired(float value)override;
+
 
     virtual int  set_reg_position_kp(int value)override;
     virtual int  set_reg_position_kd(int value)override;
 
-    virtual int  set_reg_speed_kp(int value) override;
+    virtual int  set_reg_speed_kp(int value) override; 
     virtual int  set_reg_speed_ki(int value) override;
     virtual int  set_reg_speed_kd(int value) override;
 
@@ -157,8 +172,7 @@ public:
 
     virtual int stop() override;
 
-    virtual int request_reg_i_q()override;
-    virtual int request_reg_i_q_ref()override;
+    virtual int request_reg_i_q() override;
     virtual int request_reg_speed() override;
     virtual int request_reg_current_position() override;
     virtual int request_reg_status() override;
@@ -170,7 +184,11 @@ private:
     int sendFrame(uint16_t canID,const uint8_t *frameBuffer,uint32_t size);
     int getParameter(uint8_t requestType);
     int setParameter(uint8_t requestType,int value);
-
+    int setRobotParameter(uint8_t robotType, float value);
+    int setRobotIntParameter(uint8_t requestType,int value);
+    int setFloatParameter(uint8_t requestType,float value);
+    int getRobotParameter(uint8_t robotType);
+    int getRobotIntParameter(uint8_t robotType);
     int send_request(uint8_t requestType);
 
     void motorVersionIntToString(int version);
