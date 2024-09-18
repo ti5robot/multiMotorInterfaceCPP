@@ -205,6 +205,47 @@ sort: 1
        }
   ```
 
++  bool set_motor_position(int idnum,uint32_t *elc_parameterlist, int elc_num, uint32_t elc_value);
+   ```
+  函数功能：设置电机位置
+  返回值：成功true，失败false
+  参数：
+    idnum 要设置的对应电机(如果值为-1则设置所有电机，同时elc_value要传入电机总个数)
+    elc_parameterlist 要设置的对应电机
+    elc_value 要设置的n个电机
+    elc_value 新值(下发参数为：(减速机目标角度/360)*减速比*65536)
+  示例：
+     int main()
+      {
+          setIDNUM(2);
+          cout<<"IDNUM="<<IDNUM<<endl;
+          allocate_variable(IDNUM);
+
+          if(login()){
+            cout<<"login success"<<endl;
+          }
+          uint32_t oripos[IDNUM]={0};
+          uint32_t oripos2[IDNUM]{0};
+          set_motor_position(0,oripos2,1,1000000);
+
+          sleep(2);
+          set_motor_position(1,oripos2,1,-1000000);
+          deallocate_variable();
+          if(logout()){
+            cout<<"logout success"<<endl;
+          }
+          return 0;
+       }
+  ```
+       /*设置电机位置
+        参数:
+            idnum 要设置的对应电机(如果值为-1则设置所有电机，同时elc_value要传入电机总个数)
+            elc_parameterlist 要设置的对应电机
+            elc_value 要设置的n个电机
+            elc_value 新值(下发参数为：(减速机目标角度/360)*减速比*65536)
+        返回值：
+    */
+   
 
 ### 1.3 Ti5LOGIC.h
 
