@@ -301,6 +301,99 @@ sort: 1
           return 0;
        }
     ```
+
+    + std::vector<float> get_motor_current();
+    ```
+    函数功能：读取电机电流
+    返回值：return currents; // 返回所有电机的电流值
+    参数：无
+    示例：
+      int main()
+      {
+          setIDNUM(2);
+          cout<<"IDNUM="<<IDNUM<<endl;
+          allocate_variable(IDNUM);
+
+          if(login()){
+            cout<<"login success"<<endl;
+          }
+          uint32_t oripos[IDNUM]={0};
+          uint32_t oripos2[IDNUM]{0};
+          set_motor_speed(0,oripos,1,278);
+
+          sleep(2);
+          set_motor_speed(1,oripos2,1,278);
+          get_motor_current();
+          deallocate_variable();
+          if(logout()){
+            cout<<"logout success"<<endl;
+          }
+          return 0;
+      }
+    ```
+
+    + void get_motor_current_position(int size);
+    ```
+    函数功能：获取电机位置
+    返回值：无
+    参数：size：电机数量
+    示例：
+      int main()
+      {
+          setIDNUM(2);
+          cout<<"IDNUM="<<IDNUM<<endl;
+          allocate_variable(IDNUM);
+
+          if(login()){
+            cout<<"login success"<<endl;
+          }
+          uint32_t oripos[IDNUM]={0};
+          uint32_t oripos2[IDNUM]{0};
+          set_motor_speed(0,oripos,1,278);
+
+          sleep(2);
+          set_motor_speed(1,oripos2,1,278);
+          get_motor_current();
+          get_motor_current_position(2);
+          deallocate_variable();
+          if(logout()){
+            cout<<"logout success"<<endl;
+          }
+          return 0;
+      }
+    ```
+
+    + std::vector<float> get_motor_speed();
+    ```
+    函数功能：获取电机速度
+    返回值：return speed; // 返回所有电机的速度
+    参数：无
+    示例：
+      int main()
+      {
+          setIDNUM(2);
+          cout<<"IDNUM="<<IDNUM<<endl;
+          allocate_variable(IDNUM);
+
+          if(login()){
+            cout<<"login success"<<endl;
+          }
+          uint32_t oripos[IDNUM]={0};
+          uint32_t oripos2[IDNUM]{0};
+          set_motor_speed(0,oripos,1,278);
+
+          sleep(2);
+          set_motor_speed(1,oripos2,1,278);
+          get_motor_current();
+          get_motor_current_position(2);
+          get_motor_speed()；
+          deallocate_variable();
+          if(logout()){
+            cout<<"logout success"<<endl;
+          }
+          return 0;
+      }
+    ```
     
     
 
