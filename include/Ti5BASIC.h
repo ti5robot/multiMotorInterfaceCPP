@@ -87,19 +87,10 @@ extern "C"
     // 释放内存
     void deallocate_variable();
 
-    bool login();                // 连接can设备
+    bool start();                // 连接can设备
     bool logout();               // 断开can设备
-    void get_elc_info(int size); // 获取信息
+    // void get_elc_info(int size); // 获取信息
     bool brake(int size);        // 刹车
-
-    /*设置电机参数
-      参数:
-        elc_parameterlist 要设置的对应电机
-        elc_value 要设置的n个电机
-        parameterType 要设置的项目
-        elc_value 新值
-    */
-    void set_elc_info(uint32_t *elc_parameterlist, int elc_num, int parameterType, uint32_t elc_value);
 
     /*获取电机错误状态
         参数：
@@ -125,33 +116,18 @@ extern "C"
     // 输出数组的调试信息
     void printArrayDebugInfo(float arr[], int size, const char *arr_name);
 
-    bool move_to_joint();
-    void plan_move();
-    void ACTmove(float *a, float *b, float T0); // 实际运动
-    // void setn(int npL[IDNUM]);
-    void setn(int* npL);
-    /*关节运动
-    参数：
-        *arr：存放角度值的数组
-    返回值：
-        1：成功
-        0：失败
-    */
-    bool joint_movement(const float *arr);
-
     /*设置电机位置
         参数:
-            idnum 要设置的对应电机(如果值为-1则设置所有电机，同时elc_value要传入电机总个数)
-            elc_parameterlist 要设置的对应电机
-            elc_value 要设置的n个电机
-            elc_value 新值(下发参数为：(减速机目标角度/360)*减速比*65536)
-        返回值：成功true，失败false
+            motorIds 要设置的对应电机
+            motorCount 电机数量
+            targetPositions 电机目标位置
+        返回值：成功返回true，失败返回false
     */
-    bool set_motor_position(int idnum,uint32_t *elc_parameterlist, int elc_num, uint32_t elc_value);
+    bool set_motor_position(int* motorIds,  int motorCount,uint32_t* targetPositions);
 
     /*读取电机电流*/
     std::vector<float> get_motor_current();
-    float get_motor_current_1(int motor_index);//读取指定电机电流
+    // float get_motor_current_1(int motor_index);//读取指定电机电流
 
     /*
     获取电机位置
@@ -165,21 +141,28 @@ extern "C"
 
     /*设置电机为电流模式并设置电流
         参数:
+<<<<<<< HEAD
+            motorIds 要设置的对应电机
+            motorCount 电机数量
+            targetPositions 电机目标电流
+        返回值：成功返回true，失败返回false
+=======
             idnum 要设置的对应电机(如果值为-1则设置所有电机，同时elc_value要传入电机总个数)
             elc_parameterlist 要设置的对应电机
-            elc_value 要设置的n个电机
+            elc_num 要设置的n个电机
             elc_value 新值
+>>>>>>> 37fa25217f8e749c8dfddcd4dd3becf84f1d1f44
     */
-    void set_motor_current(int idnum,uint32_t *elc_parameterlist, int elc_num, uint32_t elc_value);
+    bool set_motor_current(int* motorIds,  int motorCount,uint32_t* targetPositions);
 
     /*设置电机速度
         参数:
-            idnum 要设置的对应电机(如果值为-1则设置所有电机，同时elc_value要传入电机总个数)
-            elc_parameterlist 要设置的对应电机
-            elc_value 要设置的n个电机
-            elc_value 新值(下发参数为：(目标转速（度每秒）*减速比*100)/360)
+            motorIds 要设置的对应电机
+            motorCount 电机数量
+            targetPositions 电机目标速度(下发参数为：(目标转速（度每秒）*减速比*100)/360)
+        返回值：成功返回true，失败返回false
     */
-    void set_motor_speed(int idnum,uint32_t *elc_parameterlist, int elc_num, uint32_t elc_value);
+    bool set_motor_speed(int* motorIds,  int motorCount,uint32_t* targetPositions);
 
     /*std::string query_can();
     查询can设备号
