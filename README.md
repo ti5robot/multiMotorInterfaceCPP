@@ -23,31 +23,6 @@ sort: 1
 
 机械臂控制基础库，包含了基本控制以及信息，用户在使用时需要根据自身使用方式自行选择调用。
 
-+ void allocate_variable(int size);
-  ```
-  函数功能：动态分配内存
-  返回值：true停止，false未停止
-  参数：动态分配内存长度
-  示例：
-      int main()
-      {
-          allocate_variable(6);
-
-          login();
-          cout << "登录成功" << endl;
-          get_elc_info(6);
-          int q = get_elektrische_Maschinen_status(6);
-          clear_elc_error(6);
-          set_elc_info(ampere, 0, MotorTypeHelper::REG_TARGET_CURRENT, 0);
-          TH.j[0]=1.2;
-          move_to_joint();
-          deallocate_variable();
-          logout();
-
-          return 0;
-      }
-  ```
-
 + void writeDebugInfoToFile(const char *func_name, const char *info);
   ```
   函数功能：将信息写入log中
@@ -66,13 +41,14 @@ sort: 1
       cout << endl;
   ```
 
-+ void login();
++ void start();
   ```
   函数功能：登录can设备
   返回值：无
   参数：无
   示例：
-      login();
+      setIDNUM(2);
+      start();
       getCurrentposition->getParameter(canidList, reg_min_app_position, MotorTypeHelper::REG_MIN_APP_POSITION, IDNUM);
       for (int i = 0; i < IDNUM; i++)
       {
@@ -89,7 +65,8 @@ sort: 1
   返回值：无
   参数：无
   示例：
-      login();
+      setIDNUM(2);
+      start();
       getCurrentposition->getParameter(canidList, reg_min_app_position, MotorTypeHelper::REG_MIN_APP_POSITION, IDNUM);
       for (int i = 0; i < IDNUM; i++)
       {
@@ -100,56 +77,6 @@ sort: 1
       cout << endl;
       logout();
   ```
-
-
-
-+ void get_elc_info(int size);
-  ```
-  函数功能：获取电机参数
-  返回值：无
-  参数：电机总个数
-  示例：
-      int main()
-      {
-          login();
-          get_elc_info(6);
-          logout();
-          return 0;
-      }
-  ```
-
-+ void set_elc_info(uint32_t *elc_parameterlist,int elc_num, int parameterType,uint32_t elc_value);
-   ```
-   函数功能：设置电机参数
-   返回值：
-   参数：
-       elc_parameterlist 要设置的对应电机，
-       elc_value 要设置的第n个电机，
-       parameterType 要设置的项目，
-       elc_value 新值
-   示例：
-       int main()
-       {
-           login();
-           set_elc_info(reg_position_kp,0,MotorTypeHelper::REG_POSITION_KP, 500);
-           set_elc_info(reg_position_kp,1,MotorTypeHelper::REG_POSITION_KP, 700);
-           set_elc_info(reg_position_kp,2,MotorTypeHelper::REG_POSITION_KP, 800);
-           set_elc_info(reg_position_kp,3,MotorTypeHelper::REG_POSITION_KP, 900);
-           set_elc_info(reg_position_kp,4,MotorTypeHelper::REG_POSITION_KP, 1000);
-           set_elc_info(reg_position_kp,5,MotorTypeHelper::REG_POSITION_KP, 1100);
-           logout();
-           return 0;
-       }
-
-      下面是目标速度和目标位置的parameterType：
-        REG_TARGET_SPEED 设置目标速度  下发参数为： (目标转速（度每秒）*减速比*100)/360
-        REG_TARGET_POSITION 设置目标位置  下发参数为： (减速机目标角度/360)*减速比*65536
-       例如：
-        set_elc_info(reg_position_kp,5,MotorTypeHelper::REG_TARGET_SPEED, 目标转速);
-        set_elc_info(reg_position_kp,5,MotorTypeHelper::REG_TARGET_POSITION, 目标位置);
-   ```
-
-
 
 + int get_elektrische_Maschinen_status(int size);
   ```
@@ -164,13 +91,14 @@ sort: 1
   示例：
       int main()
       {
-           login();
+           setIDNUM(2);
+           start();
            int num = get_elektrische_Maschinen_status(6);
            logout();
            return 0;
        }
   ```
-+ void clear_elc_error(int size);
++ void clear_motor_errors(int size);
   ```
   函数功能：清除电机错误
   返回值：无
@@ -178,7 +106,8 @@ sort: 1
   示例：
       int main()
       {
-          login();
+          setIDNUM(2);
+          start();
           if(get_electricity_status() != true)
           {
               cout << "电机异常！" << endl;
@@ -189,48 +118,32 @@ sort: 1
        }
   ```
 
-+ void joint_movement(const float *arr);
-   ```
-  函数功能：电机运动
-  返回值：无
-  参数：各个关节值
-  示例：
-     int main()
-      {
-          login();
-          float arr[6]={2.3,3.2,2.2,0,0,0};
-          joint_movement(arr);
-          logout();
-          return 0;
-       }
-  ```
-
-+  bool set_motor_position(int idnum,uint32_t *elc_parameterlist, int elc_num, uint32_t elc_value);
++  bool set_motor_position(int* motorIds,  int motorCount,uint32_t* targetPositions);
    ```
     函数功能：设置电机位置
     返回值：成功true，失败false
     参数：
-      idnum 要设置的对应电机(如果值为-1则设置所有电机，同时elc_value要传入电机总个数)
-      elc_parameterlist 要设置的对应电机
-      elc_value 要设置的n个电机
-      elc_value 新值(下发参数为：(减速机目标角度/360)*减速比*65536)
+      motorIds 要设置的对应电机
+      motorCount 电机数量
+      targetPositions 电机目标位置(下发参数为：(减速机目标角度/360)*减速比*65536)
     示例：
      int main()
       {
           setIDNUM(2);
-          cout<<"IDNUM="<<IDNUM<<endl;
-          allocate_variable(IDNUM);
-
-          if(login()){
+          if(start()){
             cout<<"login success"<<endl;
           }
-          uint32_t oripos[IDNUM]={0};
-          uint32_t oripos2[IDNUM]{0};
-          set_motor_position(0,oripos,1,1000000);
-
-          sleep(2);
-          set_motor_position(1,oripos2,1,-1000000);
-          deallocate_variable();
+          int num[1]={1};
+          uint32_t newpos[2]={0};
+          set_motor_position(num,1,newpos);//设置第一个电机
+          sleep(3);
+          int num2[1]={2};
+          uint32_t newpos2[2]={0};
+          set_motor_position(num2,1,newpos2);//设置第二个电机
+          sleep(3);
+          int num3[2]={1,2};
+          uint32_t newpos3[2]={4000000,4000000};
+          set_motor_position(num3,2,newpos3);//同时设置2个电机
           if(logout()){
             cout<<"logout success"<<endl;
           }
@@ -238,30 +151,33 @@ sort: 1
        }
     ```
 
-   +  void set_motor_current(int idnum,uint32_t *elc_parameterlist, int elc_num, uint32_t elc_value);
+   +   bool set_motor_current(int* motorIds,  int motorCount,uint32_t* current);
    ```
     函数功能：设置电机为电流模式并设置电流
-    返回值：无
+    返回值：成功返回true，失败返回false
     参数：
-      idnum 要设置的对应电机(如果值为-1则设置所有电机，同时elc_value要传入电机总个数)
-      elc_parameterlist 要设置的对应电机
-      elc_value 要设置的n个电机
-      elc_value 新值
+      motorIds 要设置的对应电机
+      motorCount 电机数量
+      current 电机目标电流
     示例：
      int main()
       {
           setIDNUM(2);
-          cout<<"IDNUM="<<IDNUM<<endl;
-          allocate_variable(IDNUM);
 
-          if(login()){
+          if(start()){
             cout<<"login success"<<endl;
           }
-          uint32_t oripos[IDNUM]={0};
-          uint32_t oripos2[IDNUM]{0};
-          set_motor_current(0,oripos,1,10);
-          set_motor_current(1,oripos2,1,10);
-          deallocate_variable();
+          int num[1]={1};
+          uint32_t newcurrent[2]={0};
+          set_motor_current(num,1,newcurrent);//设置第一个电机
+          sleep(3);
+          int num2[1]={2};
+          uint32_t newcurrent2[2]={0};
+          set_motor_current(num2,1,newcurrent2);//设置第二个电机
+          sleep(3);
+          int num3[2]={1,2};
+          uint32_t newcurrent3[2]={100,100};
+          set_motor_current(num3,2,newcurrent3);//同时设置2个电机
           if(logout()){
             cout<<"logout success"<<endl;
           }
@@ -269,32 +185,32 @@ sort: 1
        }
     ```
 
-   +  void set_motor_speed(int idnum,uint32_t *elc_parameterlist, int elc_num, uint32_t elc_value);
+   +  bool set_motor_speed(int* motorIds,  int motorCount,uint32_t* speed);
    ```
     函数功能：设置电机速度
     返回值：无
     参数：
-      idnum 要设置的对应电机(如果值为-1则设置所有电机，同时elc_value要传入电机总个数)
-      elc_parameterlist 要设置的对应电机
-      elc_value 要设置的n个电机
-      elc_value 新值(下发参数为：(目标转速（度每秒）*减速比*100)/360)
+      motorIds 要设置的对应电机
+      motorCount 电机数量
+      speed 电机目标速度(下发参数为：(目标转速（度每秒）*减速比*100)/360)
     示例：
      int main()
       {
           setIDNUM(2);
-          cout<<"IDNUM="<<IDNUM<<endl;
-          allocate_variable(IDNUM);
-
-          if(login()){
+          if(start()){
             cout<<"login success"<<endl;
           }
-          uint32_t oripos[IDNUM]={0};
-          uint32_t oripos2[IDNUM]{0};
-          set_motor_speed(0,oripos,1,278);
-
-          sleep(2);
-          set_motor_speed(1,oripos2,1,278);
-          deallocate_variable();
+          int num[1]={1};
+          uint32_t newspeed[2]={0};
+          set_motor_speed(num,1,newspeed);//设置第一个电机
+          sleep(3);
+          int num2[1]={2};
+          uint32_t newspeed2[2]={0};
+          set_motor_speed(num2,1,newspeed2);//设置第二个电机
+          sleep(3);
+          int num3[2]={1,2};
+          uint32_t newcurrent3[2]={100,100};
+          set_motor_speed(num3,2,newcurrent3);//同时设置2个电机
           if(logout()){
             cout<<"logout success"<<endl;
           }
