@@ -81,11 +81,15 @@ extern uint32_t *motor_current_position; // 电机当前位置
 
 extern "C"
 {
+    // 动态分配内存
     void allocate_variable(int size);
+
+    // 释放内存
     void deallocate_variable();
 
     bool start();                // 连接can设备
     bool logout();               // 断开can设备
+    // void get_elc_info(int size); // 获取信息
     bool brake(int size);        // 刹车
 
     /*获取电机错误状态
@@ -119,7 +123,7 @@ extern "C"
             targetPositions 电机目标位置
         返回值：成功返回true，失败返回false
     */
-    bool set_motor_position(int* motorIds,  int motorCount, uint32_t* targetPositions);
+    bool set_motor_position(int* motorIds,  int motorCount,uint32_t* targetPositions);
 
     /*读取电机电流*/
     std::vector<float> get_motor_current();
@@ -137,19 +141,12 @@ extern "C"
 
     /*设置电机为电流模式并设置电流
         参数:
-<<<<<<< HEAD
             motorIds 要设置的对应电机
             motorCount 电机数量
             targetPositions 电机目标电流
         返回值：成功返回true，失败返回false
-=======
-            idnum 要设置的对应电机(如果值为-1则设置所有电机，同时elc_value要传入电机总个数)
-            elc_parameterlist 要设置的对应电机
-            elc_num 要设置的n个电机
-            elc_value 新值
->>>>>>> 37fa25217f8e749c8dfddcd4dd3becf84f1d1f44
     */
-    bool set_motor_current(int* motorIds,  int motorCount, uint32_t* targetPositions);
+    bool set_motor_current(int* motorIds,  int motorCount,uint32_t* current);
 
     /*设置电机速度
         参数:
@@ -158,7 +155,7 @@ extern "C"
             targetPositions 电机目标速度(下发参数为：(目标转速（度每秒）*减速比*100)/360)
         返回值：成功返回true，失败返回false
     */
-    bool set_motor_speed(int* motorIds,  int motorCount, uint32_t* targetPositions);
+    bool set_motor_speed(int* motorIds,  int motorCount,uint32_t* speed);
 
     /*std::string query_can();
     查询can设备号
