@@ -145,6 +145,7 @@ extern "C"
             elc_parameterlist 要设置的对应电机
             elc_value 要设置的n个电机
             elc_value 新值(下发参数为：(减速机目标角度/360)*减速比*65536)
+        返回值：成功true，失败false
     */
     bool set_motor_position(int idnum,uint32_t *elc_parameterlist, int elc_num, uint32_t elc_value);
 
@@ -161,7 +162,7 @@ extern "C"
 
     /*获取电机速度*/
     std::vector<float> get_motor_speed();
-    
+
     /*设置电机为电流模式并设置电流
         参数:
             idnum 要设置的对应电机(如果值为-1则设置所有电机，同时elc_value要传入电机总个数)
