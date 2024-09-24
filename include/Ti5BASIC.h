@@ -27,32 +27,6 @@ extern float scale;
 extern float j2p;
 extern float NMAX;
 
-// extern const int IDNUM;
-// extern uint8_t canidList[IDNUM];
-
-// extern uint32_t reg_position_kp[IDNUM]; // 位置环比例
-// extern uint32_t reg_position_kd[IDNUM]; // 位置环微分
-
-// extern uint32_t reg_speed_kp[IDNUM]; // 速度环比例
-// extern uint32_t reg_speed_ki[IDNUM]; // 速度环积分
-
-// extern uint32_t reg_max_curr_value[IDNUM]; // 最大正电流
-// extern uint32_t reg_min_curr_value[IDNUM]; // 最小负电流
-
-// extern uint32_t reg_max_app_speed[IDNUM]; // 最大正向允许速度
-// extern uint32_t reg_min_app_speed[IDNUM]; // 最小负向允许速度
-
-// extern uint32_t reg_max_app_position[IDNUM]; // 电机最大正向位
-// extern uint32_t reg_min_app_position[IDNUM]; // 电机最大负向位
-
-// extern uint32_t electricity[IDNUM];        // 电流值
-// extern uint32_t electric_machinery[IDNUM]; // 电机错误状态
-// extern uint32_t reg_fault_clear[IDNUM];    // 清除电机错误
-// extern uint32_t ampere[IDNUM];             // 电机电流值
-
-// extern uint32_t ele_status[IDNUM]; // 电机状态
-// extern uint32_t ele_speed[IDNUM];  // 电机速度
-
 extern uint8_t *canidList;
 extern uint32_t *reg_position_kp; // 位置环比例
 extern uint32_t *reg_position_kd; // 位置环微分
@@ -87,19 +61,19 @@ extern "C"
     // 释放内存
     void deallocate_variable();
 
-<<<<<<< HEAD
-    /*初始化can设备*/
+    /*初始化can设备
+        参数：无
+        返回值：成功返回true，失败返回false
+    */
     bool Start(); 
 
-    /*断开can设备，也可以用作清除can设备占用*/
+    /*断开can设备，也可以用作清除can设备占用
+        参数：无
+        返回值：成功返回true，失败返回false
+    */
     bool Exit();               
 
     // bool brake(int size); 
-=======
-    bool start();                // 连接can设备
-    bool logout();               // 断开can设备
-    bool brake(int size);        // 刹车
->>>>>>> 14210a238c4df108192deab93e68faae504cc1c6
 
     /*获取电机错误状态
         参数：
@@ -134,7 +108,6 @@ extern "C"
     */
     bool set_motor_position(int* motorIds,  int motorCount,uint32_t* targetPositions);
 
-<<<<<<< HEAD
     /*读取电机电流
         参数：无
         返回值：电机电流数组
@@ -145,16 +118,6 @@ extern "C"
     获取电机位置
         参数：无
         返回值：电机位置数组
-=======
-    /*读取电机电流*/
-    std::vector<float> get_motor_current();
-
-    /*
-    获取电机位置
-        参数：
-            size：电机数量
-        返回值：无
->>>>>>> 14210a238c4df108192deab93e68faae504cc1c6
     */
     uint32_t* get_motor_position();
 

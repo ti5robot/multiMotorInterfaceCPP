@@ -15,10 +15,10 @@ extern int IDNUM;
 
 int getIDNUM();
 
-/*设置IDNUM
-*参数：newIDNUM - 新的IDNUM即电机个数
+/*设置电机总个数
+*参数：Tota电机总个数
 */
-void setIDNUM(int newIDNUM);
+void setmotorTotal(int Total);
 
 
 
