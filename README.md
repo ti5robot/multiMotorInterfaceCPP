@@ -80,7 +80,7 @@ sort: 1
       logout();
   ```
 
-+ int get_elektrische_Maschinen_status(int size);
++ int get_motor_error_status(int size);
   ```
   函数功能：获取电机错误状态
   返回值：
