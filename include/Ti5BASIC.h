@@ -87,6 +87,7 @@ extern "C"
     // 释放内存
     void deallocate_variable();
 
+<<<<<<< HEAD
     /*初始化can设备*/
     bool Start(); 
 
@@ -94,6 +95,11 @@ extern "C"
     bool Exit();               
 
     // bool brake(int size); 
+=======
+    bool start();                // 连接can设备
+    bool logout();               // 断开can设备
+    bool brake(int size);        // 刹车
+>>>>>>> 14210a238c4df108192deab93e68faae504cc1c6
 
     /*获取电机错误状态
         参数：
@@ -128,6 +134,7 @@ extern "C"
     */
     bool set_motor_position(int* motorIds,  int motorCount,uint32_t* targetPositions);
 
+<<<<<<< HEAD
     /*读取电机电流
         参数：无
         返回值：电机电流数组
@@ -138,6 +145,16 @@ extern "C"
     获取电机位置
         参数：无
         返回值：电机位置数组
+=======
+    /*读取电机电流*/
+    std::vector<float> get_motor_current();
+
+    /*
+    获取电机位置
+        参数：
+            size：电机数量
+        返回值：无
+>>>>>>> 14210a238c4df108192deab93e68faae504cc1c6
     */
     uint32_t* get_motor_position();
 

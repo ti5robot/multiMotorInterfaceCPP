@@ -36,7 +36,11 @@ int main()
 
     get_motor_speed();
 
+<<<<<<< HEAD
     get_motor_position();
+=======
+    get_motor_current_position(2);
+>>>>>>> 14210a238c4df108192deab93e68faae504cc1c6
     get_motor_speed();
     int num[1]={1};
     uint32_t newpos[2]={0};

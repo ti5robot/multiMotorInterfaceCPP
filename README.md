@@ -4,6 +4,8 @@ sort: 1
 
 # SDK介绍
 
+运行环境ubuntu22.04
+
 机械臂控制的代码中，分别是`include`，`src`，`log`以及`usrlib`。
 
 + include存储着机械臂所需的头文件。
@@ -78,7 +80,7 @@ sort: 1
       logout();
   ```
 
-+ int get_elektrische_Maschinen_status(int size);
++ int get_motor_error_status(int size);
   ```
   函数功能：获取电机错误状态
   返回值：
