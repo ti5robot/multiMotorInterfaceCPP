@@ -309,7 +309,7 @@ sort: 1
 ### 1.4 tool.h
 
 该文件是一些`tool`，具体函数使用及参数请查看该文件。
-+ void setIDNUM(int newIDNUM);
++ void setmotorTotal(int newIDNUM);
 ```
 函数功能：设置IDNUM
 返回值：无
@@ -317,7 +317,7 @@ sort: 1
 示例：
   int main()
 {
-    setIDNUM(2);//两个IDNUM
+    setmotorTotal(2);//两个IDNUM
     cout<<"IDNUM="<<IDNUM<<endl;
     allocate_variable(IDNUM);
 
