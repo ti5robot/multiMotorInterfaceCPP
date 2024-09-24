@@ -44,7 +44,8 @@ sort: 1
   示例：
       int main()
       {
-        setmotorTotal(2);  //设置电机总个数为2个
+        int num_of_motors=2;
+        setmotorTotal(num_of_motors);  //设置电机总个数为2个
         if(Start()){  //初始化can设备
              cout<<"Start success"<<endl;
          }
@@ -64,7 +65,8 @@ sort: 1
   示例：
       int main()
       {
-        setmotorTotal(2);  //设置电机总个数为2个
+        int num_of_motors=2;
+        setmotorTotal(num_of_motors);  //设置电机总个数为2个
         if(Start()){  //初始化can设备
              cout<<"Start success"<<endl;
          }
@@ -89,10 +91,11 @@ sort: 1
   示例：
       int main()
       {
-           setmotorTotal(2);  //设置电机总个数为2个
+           int num_of_motors=2;
+           setmotorTotal(num_of_motors);  //设置电机总个数为2个
            Start();  //初始化can设备
            uint32_t* errorStatuses = get_motor_error_status();//调用get_motor_error_status函数获取所有电机状态码
-           for (int i = 0; i < IDNUM; i++) {
+           for (int i = 0; i < num_of_motors; i++) {
               cout << "电机 " << i + 1 << " 状态码: " << errorStatuses[i] << endl;
            }
            Exit();  //断开can设备连接
@@ -107,7 +110,8 @@ sort: 1
   示例：
       int main()
       {
-          setmotorTotal(2);  //设置电机总个数为2个
+          int num_of_motors=2;
+          setmotorTotal(num_of_motors);  //设置电机总个数为2个
           Start();  //初始化can设备
           if(get_motor_error_status() != true) //调用get_motor_error_status获取电机错误状态
           {
@@ -130,7 +134,8 @@ sort: 1
     示例：
      int main()
       {
-          setmotorTotal(2);  //设置电机总个数为2个
+          int num_of_motors=2;
+          setmotorTotal(num_of_motors);  //设置电机总个数为2个
           if(Start()){  //初始化can设备
             cout<<"Start success"<<endl;
           }
@@ -155,11 +160,12 @@ sort: 1
     参数：
       motorIds 要设置的对应电机
       motorCount 电机数量
-      current 电机目标电流
+      current 电机目标电流,单位：毫安ma
     示例：
      int main()
       {
-          setmotorTotal(2);  //设置电机总个数为2个
+          int num_of_motors=2;
+          setmotorTotal(num_of_motors);  //设置电机总个数为2个
           if(Start()){  //初始化can设备
             cout<<"Start success"<<endl;
           }
@@ -183,11 +189,12 @@ sort: 1
     参数：
       motorIds 要设置的对应电机
       motorCount 电机数量
-      speed 电机目标速度(下发参数为：(目标转速（度每秒）*减速比*100)/360)
+      speed 电机目标速度,单位：rpm(下发参数为：(目标转速（度每秒）*减速比*100)/360)
     示例：
      int main()
       {
-          setmotorTotal(2);  //设置电机总个数为2个
+          int num_of_motors=2;
+          setmotorTotal(num_of_motors);  //设置电机总个数为2个
           if(Start()){  //初始化can设备
             cout<<"Start success"<<endl;
           }
@@ -196,8 +203,8 @@ sort: 1
           set_motor_speed(num,1,newspeed);//设置一个电机
           sleep(3);
           int num3[2]={1,2};
-          uint32_t newcurrent3[2]={100,100};
-          set_motor_speed(num3,2,newcurrent3);//设置两个电机
+          uint32_t newspeed3[2]={100,100};
+          set_motor_speed(num3,2,newspeed3);//设置两个电机
           if(Exit()){  //断开can设备连接
             cout<<"Exit success"<<endl;
           }
@@ -213,14 +220,15 @@ sort: 1
     示例：
       int main()
       {
-          setmotorTotal(2);  //设置电机总个数为2个
+          int num_of_motors=2;
+          setmotorTotal(num_of_motors);  //设置电机总个数为2个
           if(Start()){  //初始化can设备
             cout<<"Start success"<<endl;
           }
           uint32_t* current_values = get_motor_current();  //调用get_motor_current函数获取所有电机电流值
           if(current_values != nullptr)
           {
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < num_of_motors; i++)
             {
               std::cout << "main函数中电机" << (i + 1) << "的电流: " << static_cast<int32_t>(current_values[i]) << std::endl;
             }
@@ -243,7 +251,8 @@ sort: 1
     示例：
       int main()
       {
-          setmotorTotal(2);  //设置电机总个数为2个
+          int num_of_motors=2;
+          setmotorTotal(num_of_motors);  //设置电机总个数为2个
           if(Start()){  //初始化can设备
             cout<<"Start success"<<endl;
           }
@@ -252,7 +261,7 @@ sort: 1
 
           if (get_positions != nullptr)
           {
-              for (int i = 0; i < 2; i++)
+              for (int i = 0; i < num_of_motors; i++)
               {
                   std::cout << "main函数中电机" << (i + 1) << "的位置: " << static_cast<int32_t>(get_positions[i]) << std::endl;
               }
@@ -276,14 +285,15 @@ sort: 1
     示例：
       int main()
       {
-          setmotorTotal(2);  //设置电机总个数为2个
+          int num_of_motors=2;
+          setmotorTotal(num_of_motors);  //设置电机总个数为2个
           if(Start()){  //初始化can设备
             cout<<"Start success"<<endl;
           }
           uint32_t* speed_values = get_motor_speed();  //调用get_motor_speed函数获取所有电机速度
           if(speed_values != nullptr)
           {
-              for (int i = 0; i < 2; i++)
+              for (int i = 0; i < num_of_motors; i++)
               {
                   std::cout << "main函数中电机" << (i + 1) << "的速度: " << static_cast<int32_t>(speed_values[i]) << std::endl;
               }
