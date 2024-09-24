@@ -89,7 +89,6 @@ extern "C"
 
     bool start();                // 连接can设备
     bool logout();               // 断开can设备
-    // void get_elc_info(int size); // 获取信息
     bool brake(int size);        // 刹车
 
     /*获取电机错误状态
@@ -127,12 +126,12 @@ extern "C"
 
     /*读取电机电流*/
     std::vector<float> get_motor_current();
-    // float get_motor_current_1(int motor_index);//读取指定电机电流
 
     /*
     获取电机位置
-    参数：
-        size：电机数量
+        参数：
+            size：电机数量
+        返回值：无
     */
     void get_motor_current_position(int size);
 
@@ -157,8 +156,9 @@ extern "C"
     */
     bool set_motor_speed(int* motorIds,  int motorCount,uint32_t* speed);
 
-    /*std::string query_can();
-    查询can设备号
+    /*查询can设备号
+        参数：无
+        返回值：can设备序列号
     */
     std::vector<std::string> query_can();
 }
