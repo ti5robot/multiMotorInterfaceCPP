@@ -76,7 +76,7 @@ sort: 1
       }
   ```
 
-+ int get_motor_error_status(int size);
++ uint32_t* get_motor_error_status();
   ```
   函数功能：获取电机错误状态
   返回值：
@@ -85,23 +85,25 @@ sort: 1
       2：过压
       4：欠压
       16：启动错误
-  参数：电机总个数
+  参数：无
   示例：
       int main()
       {
            setmotorTotal(2);  //设置电机总个数为2个
            Start();  //初始化can设备
-           int num = get_motor_error_status(6);  //调用get_motor_error_status函数获取电机错误状态
-           cout<<"num: "<<num<<endl;
+           uint32_t* errorStatuses = get_motor_error_status();//调用get_motor_error_status函数获取所有电机状态码
+           for (int i = 0; i < IDNUM; i++) {
+              cout << "电机 " << i + 1 << " 状态码: " << errorStatuses[i] << endl;
+           }
            Exit();  //断开can设备连接
            return 0;
        }
   ```
-+ void clear_motor_errors(int size);
++ void clear_motor_errors();
   ```
   函数功能：清除电机错误
   返回值：无
-  参数：电机总个数
+  参数：无
   示例：
       int main()
       {
@@ -111,7 +113,7 @@ sort: 1
           {
               cout << "电机异常！" << endl;
           }
-          clear_motor_errors(2);//清除2个电机的错误
+          clear_motor_errors();//清除电机的错误
           Exit();  //断开can设备连接
           return 0;
        }
