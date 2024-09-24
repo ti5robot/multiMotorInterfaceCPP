@@ -38,7 +38,7 @@ sort: 1
 
 + bool Start();
   ```
-  函数功能：登录can设备
+  函数功能：初始化can设备
   返回值：成功返回true，失败返回false
   参数：无
   示例：
