@@ -52,6 +52,7 @@ sort: 1
         if(Exit()){
             cout<<"Exit success"<<endl;
         }
+        return 0;
       }
   ```
 
@@ -71,6 +72,7 @@ sort: 1
         if(Exit()){
             cout<<"Exit success"<<endl;
         }
+        return 0;
       }
   ```
 
