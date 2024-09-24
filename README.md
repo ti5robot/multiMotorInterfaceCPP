@@ -33,7 +33,7 @@ sort: 1
       *func_name：函数名字
       *info：要写入log的信息内容
   示例：
-      writeDebugInfoToFile(__func__, "LogInfo");
+      writeDebugInfoToFile(__func__, "LogInfo");//调用writeDebugInfoToFile将内容写入log文件中
   ```
 
 + bool Start();
@@ -44,8 +44,8 @@ sort: 1
   示例：
       int main()
       {
-        setmotorTotal(2);
-        if(Start()){
+        setmotorTotal(2);  //设置电机总个数为2个
+        if(Start()){  //初始化can设备
              cout<<"Start success"<<endl;
          }
         cout<<"程序开始"<<endl;
@@ -64,12 +64,12 @@ sort: 1
   示例：
       int main()
       {
-        setmotorTotal(2);
-        if(Start()){
+        setmotorTotal(2);  //设置电机总个数为2个
+        if(Start()){  //初始化can设备
              cout<<"Start success"<<endl;
          }
         cout<<"程序开始"<<endl;
-        if(Exit()){
+        if(Exit()){  //断开can设备连接
             cout<<"Exit success"<<endl;
         }
         return 0;
@@ -89,10 +89,10 @@ sort: 1
   示例：
       int main()
       {
-           setmotorTotal(2);
-           Start();
-           int num = get_elektrische_Maschinen_status(6);
-           Exit();
+           setmotorTotal(2);  //设置电机总个数为2个
+           Start();  //初始化can设备
+           int num = get_motor_error_status(6);  //调用get_motor_error_status函数获取电机错误状态
+           Exit();  //断开can设备连接
            return 0;
        }
   ```
@@ -104,14 +104,14 @@ sort: 1
   示例：
       int main()
       {
-          setmotorTotal(2);
-          Start();
-          if(get_electricity_status() != true)
+          setmotorTotal(2);  //设置电机总个数为2个
+          Start();  //初始化can设备
+          if(get_motor_error_status() != true) //调用get_motor_error_status获取电机错误状态
           {
               cout << "电机异常！" << endl;
           }
-          clear_elc_erro(6);//清除6个电机的错误
-          Exit();
+          clear_motor_errors(2);//清除2个电机的错误
+          Exit();  //断开can设备连接
           return 0;
        }
   ```
@@ -127,8 +127,8 @@ sort: 1
     示例：
      int main()
       {
-          setmotorTotal(2);
-          if(Start()){
+          setmotorTotal(2);  //设置电机总个数为2个
+          if(Start()){  //初始化can设备
             cout<<"Start success"<<endl;
           }
           int num[1]={1};
@@ -138,7 +138,7 @@ sort: 1
           int num3[2]={1,2};
           uint32_t newpos3[2]={4000000,4000000};
           set_motor_position(num3,2,newpos3);//设置两个电机
-          if(Exit()){
+          if(Exit()){  //断开can设备连接
             cout<<"Exit success"<<endl;
           }
           return 0;
@@ -156,8 +156,8 @@ sort: 1
     示例：
      int main()
       {
-          setmotorTotal(2);
-          if(Start()){
+          setmotorTotal(2);  //设置电机总个数为2个
+          if(Start()){  //初始化can设备
             cout<<"Start success"<<endl;
           }
           int num[1]={1};
@@ -166,7 +166,7 @@ sort: 1
           int num3[2]={1,2};
           uint32_t newcurrent3[2]={100,100};
           set_motor_current(num3,2,newcurrent3);//设置两个电机
-          if(Exit()){
+          if(Exit()){  //断开can设备连接
             cout<<"Exit success"<<endl;
           }
           return 0;
@@ -184,8 +184,8 @@ sort: 1
     示例：
      int main()
       {
-          setmotorTotal(2);
-          if(Start()){
+          setmotorTotal(2);  //设置电机总个数为2个
+          if(Start()){  //初始化can设备
             cout<<"Start success"<<endl;
           }
           int num[1]={1};
@@ -195,7 +195,7 @@ sort: 1
           int num3[2]={1,2};
           uint32_t newcurrent3[2]={100,100};
           set_motor_speed(num3,2,newcurrent3);//设置两个电机
-          if(Exit()){
+          if(Exit()){  //断开can设备连接
             cout<<"Exit success"<<endl;
           }
           return 0;
@@ -210,11 +210,11 @@ sort: 1
     示例：
       int main()
       {
-          setmotorTotal(2);
-          if(Start()){
+          setmotorTotal(2);  //设置电机总个数为2个
+          if(Start()){  //初始化can设备
             cout<<"Start success"<<endl;
           }
-          uint32_t* current_values = get_motor_current();
+          uint32_t* current_values = get_motor_current();  //调用get_motor_current函数获取所有电机电流值
           if(current_values != nullptr)
           {
             for (int i = 0; i < 2; i++)
@@ -225,7 +225,7 @@ sort: 1
           else{
             std::cerr << "main函数中获取电机电流失败！" << std::endl;
           }
-          if(Exit()){
+          if(Exit()){   //断开can设备连接
             cout<<"Exit success"<<endl;
           }
           return 0;
@@ -240,17 +240,15 @@ sort: 1
     示例：
       int main()
       {
-          setmotorTotal(2);
-          if(Start()){
+          setmotorTotal(2);  //设置电机总个数为2个
+          if(Start()){  //初始化can设备
             cout<<"Start success"<<endl;
           }
           // 调用 get_motor_position 函数
-          uint32_t* get_positions = get_motor_position();
+          uint32_t* get_positions = get_motor_position();  //调用get_motor_position函数获取所有电机位置
 
-          // 检查返回的指针是否为 nullptr
           if (get_positions != nullptr)
           {
-              // 使用 positions 数组
               for (int i = 0; i < 2; i++)
               {
                   std::cout << "main函数中电机" << (i + 1) << "的位置: " << static_cast<int32_t>(get_positions[i]) << std::endl;
@@ -260,7 +258,7 @@ sort: 1
           {
               std::cerr << "main函数中获取电机位置失败！" << std::endl;
           }
-          if(Exit()){
+          if(Exit()){  //断开can设备连接
             cout<<"Exit success"<<endl;
           }
           return 0;
@@ -275,11 +273,11 @@ sort: 1
     示例：
       int main()
       {
-          setmotorTotal(2);
-          if(Start()){
+          setmotorTotal(2);  //设置电机总个数为2个
+          if(Start()){  //初始化can设备
             cout<<"Start success"<<endl;
           }
-          uint32_t* speed_values = get_motor_speed();
+          uint32_t* speed_values = get_motor_speed();  //调用get_motor_speed函数获取所有电机速度
           if(speed_values != nullptr)
           {
               for (int i = 0; i < 2; i++)
@@ -291,7 +289,7 @@ sort: 1
               std::cerr << "main函数中获取电机速度失败！" << std::endl;
           }
 
-          if(Exit()){
+          if(Exit()){  //断开can设备连接
             cout<<"Exit success"<<endl;
           }
           return 0;
@@ -316,11 +314,11 @@ sort: 1
 示例：
   int main()
 {
-    setmotorTotal(2);
-    if(Start()){
+    setmotorTotal(2);  //设置电机总个数为2个
+    if(Start()){  //初始化can设备
         cout<<"login success"<<endl;
     }
-    if(Exit()){
+    if(Exit()){  //断开can设备连接
         cout<<"Exit success"<<endl;
     }
 
