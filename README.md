@@ -44,7 +44,7 @@ sort: 1
   示例：
       int main()
       {
-        setIDNUM(2);
+        setmotorTotal(2);
         if(Start()){
              cout<<"Start success"<<endl;
          }
@@ -64,7 +64,7 @@ sort: 1
   示例：
       int main()
       {
-        setIDNUM(2);
+        setmotorTotal(2);
         if(Start()){
              cout<<"Start success"<<endl;
          }
@@ -89,7 +89,7 @@ sort: 1
   示例：
       int main()
       {
-           setIDNUM(2);
+           setmotorTotal(2);
            Start();
            int num = get_elektrische_Maschinen_status(6);
            Exit();
@@ -104,7 +104,7 @@ sort: 1
   示例：
       int main()
       {
-          setIDNUM(2);
+          setmotorTotal(2);
           Start();
           if(get_electricity_status() != true)
           {
@@ -127,7 +127,7 @@ sort: 1
     示例：
      int main()
       {
-          setIDNUM(2);
+          setmotorTotal(2);
           if(Start()){
             cout<<"Start success"<<endl;
           }
@@ -156,8 +156,7 @@ sort: 1
     示例：
      int main()
       {
-          setIDNUM(2);
-
+          setmotorTotal(2);
           if(Start()){
             cout<<"Start success"<<endl;
           }
@@ -185,7 +184,7 @@ sort: 1
     示例：
      int main()
       {
-          setIDNUM(2);
+          setmotorTotal(2);
           if(Start()){
             cout<<"Start success"<<endl;
           }
@@ -211,7 +210,7 @@ sort: 1
     示例：
       int main()
       {
-          setIDNUM(2);
+          setmotorTotal(2);
           if(Start()){
             cout<<"Start success"<<endl;
           }
@@ -241,7 +240,7 @@ sort: 1
     示例：
       int main()
       {
-          setIDNUM(2);
+          setmotorTotal(2);
           if(Start()){
             cout<<"Start success"<<endl;
           }
@@ -276,7 +275,7 @@ sort: 1
     示例：
       int main()
       {
-          setIDNUM(2);
+          setmotorTotal(2);
           if(Start()){
             cout<<"Start success"<<endl;
           }
