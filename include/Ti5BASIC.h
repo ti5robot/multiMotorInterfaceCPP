@@ -69,15 +69,15 @@ extern uint32_t *reg_min_app_speed; // 最小负向允许速度
 extern uint32_t *reg_max_app_position; // 电机最大正向位
 extern uint32_t *reg_min_app_position; // 电机最大负向位
 
-extern uint32_t *electricity;        // 电流值
+extern uint32_t *MotorCurrent;        // 电流值
 extern uint32_t *electric_machinery; // 电机错误状态
 extern uint32_t *reg_fault_clear;    // 清除电机错误
 extern uint32_t *ampere;             // 电机电流值
 
 extern uint32_t *ele_status; // 电机状态
-extern uint32_t *ele_speed;  // 电机速度
+extern uint32_t *MotorSpeed;  // 电机速度
 
-extern uint32_t *motor_current_position; // 电机当前位置
+extern uint32_t *MotorPosition; // 电机当前位置
 
 extern "C"
 {
@@ -87,10 +87,13 @@ extern "C"
     // 释放内存
     void deallocate_variable();
 
-    bool start();                // 连接can设备
-    bool logout();               // 断开can设备
-    // void get_elc_info(int size); // 获取信息
-    bool brake(int size);        // 刹车
+    /*初始化can设备*/
+    bool Start(); 
+
+    /*断开can设备，也可以用作清除can设备占用*/
+    bool Exit();               
+
+    // bool brake(int size); 
 
     /*获取电机错误状态
         参数：
@@ -125,19 +128,24 @@ extern "C"
     */
     bool set_motor_position(int* motorIds,  int motorCount,uint32_t* targetPositions);
 
-    /*读取电机电流*/
-    std::vector<float> get_motor_current();
-    // float get_motor_current_1(int motor_index);//读取指定电机电流
+    /*读取电机电流
+        参数：无
+        返回值：电机电流数组
+    */
+    uint32_t* get_motor_current();
 
     /*
     获取电机位置
-    参数：
-        size：电机数量
+        参数：无
+        返回值：电机位置数组
     */
-    void get_motor_current_position(int size);
+    uint32_t* get_motor_position();
 
-    /*获取电机速度*/
-    std::vector<float> get_motor_speed();
+    /*获取电机速度
+        参数：无
+        返回值：电机速度数组
+    */
+    uint32_t* get_motor_speed();
 
     /*设置电机为电流模式并设置电流
         参数:
@@ -157,8 +165,9 @@ extern "C"
     */
     bool set_motor_speed(int* motorIds,  int motorCount,uint32_t* speed);
 
-    /*std::string query_can();
-    查询can设备号
+    /*查询can设备号
+        参数：无
+        返回值：can设备序列号
     */
     std::vector<std::string> query_can();
 }
