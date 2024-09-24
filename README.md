@@ -33,51 +33,34 @@ sort: 1
       *func_name：函数名字
       *info：要写入log的信息内容
   示例：
-      getCurrentposition->getParameter(canidList, reg_min_app_position, MotorTypeHelper::REG_MIN_APP_POSITION, IDNUM);
-      for (int i = 0; i < IDNUM; i++)
-      {
-            cout << "电机" << i << "最大负向位置: " << static_cast<int32_t>(reg_min_app_position[i]) << endl;
-            sprintf(LogInfo, "电机%d最大正向位置: %d", i, static_cast<int32_t>(reg_min_app_position[i]));
-            writeDebugInfoToFile(__func__, LogInfo);
-      }
-      cout << endl;
+      writeDebugInfoToFile(__func__, "LogInfo");
   ```
 
-+ void start();
++ void Start();
   ```
   函数功能：登录can设备
   返回值：无
   参数：无
   示例：
-      setIDNUM(2);
-      start();
-      getCurrentposition->getParameter(canidList, reg_min_app_position, MotorTypeHelper::REG_MIN_APP_POSITION, IDNUM);
-      for (int i = 0; i < IDNUM; i++)
+      int main()
       {
-            cout << "电机" << i << "最大负向位置: " << static_cast<int32_t>(reg_min_app_position[i]) << endl;
-            sprintf(LogInfo, "电机%d最大正向位置: %d", i, static_cast<int32_t>(reg_min_app_position[i]));
-            writeDebugInfoToFile(__func__, LogInfo);
+        setIDNUM(2);
+        Start();
+        cout<<"程序开始"<<endl;
+        Exit();
       }
-      cout << endl;
   ```
 
-+ void logout();//函数功能：登出can设备
++ void Exit();
     ```
-  函数功能：登录can设备
+  函数功能：断开can设备，也可以用作清除can设备占用
   返回值：无
   参数：无
   示例：
       setIDNUM(2);
-      start();
-      getCurrentposition->getParameter(canidList, reg_min_app_position, MotorTypeHelper::REG_MIN_APP_POSITION, IDNUM);
-      for (int i = 0; i < IDNUM; i++)
-      {
-            cout << "电机" << i << "最大负向位置: " << static_cast<int32_t>(reg_min_app_position[i]) << endl;
-            sprintf(LogInfo, "电机%d最大正向位置: %d", i, static_cast<int32_t>(reg_min_app_position[i]));
-            writeDebugInfoToFile(__func__, LogInfo);
-      }
-      cout << endl;
-      logout();
+      Start();
+      cout<<"程序开始"<<endl;
+      Exit();
   ```
 
 + int get_motor_error_status(int size);
@@ -94,9 +77,9 @@ sort: 1
       int main()
       {
            setIDNUM(2);
-           start();
+           Start();
            int num = get_elektrische_Maschinen_status(6);
-           logout();
+           Exit();
            return 0;
        }
   ```
@@ -109,13 +92,13 @@ sort: 1
       int main()
       {
           setIDNUM(2);
-          start();
+          Start();
           if(get_electricity_status() != true)
           {
               cout << "电机异常！" << endl;
           }
-          clear_elc_erro(6);
-          logout();
+          clear_elc_erro(6);//清除6个电机的错误
+          Exit();
           return 0;
        }
   ```
@@ -132,22 +115,18 @@ sort: 1
      int main()
       {
           setIDNUM(2);
-          if(start()){
-            cout<<"login success"<<endl;
+          if(Start()){
+            cout<<"Start success"<<endl;
           }
           int num[1]={1};
           uint32_t newpos[2]={0};
-          set_motor_position(num,1,newpos);//设置第一个电机
-          sleep(3);
-          int num2[1]={2};
-          uint32_t newpos2[2]={0};
-          set_motor_position(num2,1,newpos2);//设置第二个电机
+          set_motor_position(num,1,newpos);//设置一个电机
           sleep(3);
           int num3[2]={1,2};
           uint32_t newpos3[2]={4000000,4000000};
-          set_motor_position(num3,2,newpos3);//同时设置2个电机
-          if(logout()){
-            cout<<"logout success"<<endl;
+          set_motor_position(num3,2,newpos3);//设置两个电机
+          if(Exit()){
+            cout<<"Exit success"<<endl;
           }
           return 0;
        }
@@ -166,22 +145,17 @@ sort: 1
       {
           setIDNUM(2);
 
-          if(start()){
-            cout<<"login success"<<endl;
+          if(Start()){
+            cout<<"Start success"<<endl;
           }
           int num[1]={1};
           uint32_t newcurrent[2]={0};
-          set_motor_current(num,1,newcurrent);//设置第一个电机
-          sleep(3);
-          int num2[1]={2};
-          uint32_t newcurrent2[2]={0};
-          set_motor_current(num2,1,newcurrent2);//设置第二个电机
-          sleep(3);
+          set_motor_current(num,1,newcurrent);//设置一个电机
           int num3[2]={1,2};
           uint32_t newcurrent3[2]={100,100};
-          set_motor_current(num3,2,newcurrent3);//同时设置2个电机
-          if(logout()){
-            cout<<"logout success"<<endl;
+          set_motor_current(num3,2,newcurrent3);//设置两个电机
+          if(Exit()){
+            cout<<"Exit success"<<endl;
           }
           return 0;
        }
@@ -199,115 +173,114 @@ sort: 1
      int main()
       {
           setIDNUM(2);
-          if(start()){
-            cout<<"login success"<<endl;
+          if(Start()){
+            cout<<"Start success"<<endl;
           }
           int num[1]={1};
           uint32_t newspeed[2]={0};
-          set_motor_speed(num,1,newspeed);//设置第一个电机
-          sleep(3);
-          int num2[1]={2};
-          uint32_t newspeed2[2]={0};
-          set_motor_speed(num2,1,newspeed2);//设置第二个电机
+          set_motor_speed(num,1,newspeed);//设置一个电机
           sleep(3);
           int num3[2]={1,2};
           uint32_t newcurrent3[2]={100,100};
-          set_motor_speed(num3,2,newcurrent3);//同时设置2个电机
-          if(logout()){
-            cout<<"logout success"<<endl;
+          set_motor_speed(num3,2,newcurrent3);//设置两个电机
+          if(Exit()){
+            cout<<"Exit success"<<endl;
           }
           return 0;
        }
     ```
 
-    + std::vector<float> get_motor_current();
+    + uint32_t* get_motor_current();
     ```
     函数功能：读取电机电流
-    返回值：return currents; // 返回所有电机的电流值
+    返回值：return MotorCurrent; // 返回所有电机的电流值
     参数：无
     示例：
       int main()
       {
           setIDNUM(2);
-          cout<<"IDNUM="<<IDNUM<<endl;
-          allocate_variable(IDNUM);
-
-          if(login()){
-            cout<<"login success"<<endl;
+          if(Start()){
+            cout<<"Start success"<<endl;
           }
-          uint32_t oripos[IDNUM]={0};
-          uint32_t oripos2[IDNUM]{0};
-          set_motor_speed(0,oripos,1,278);
-
-          sleep(2);
-          set_motor_speed(1,oripos2,1,278);
-          get_motor_current();
-          deallocate_variable();
-          if(logout()){
-            cout<<"logout success"<<endl;
+          uint32_t* current_values = get_motor_current();
+          if(current_values != nullptr)
+          {
+            for (int i = 0; i < 2; i++)
+            {
+              std::cout << "main函数中电机" << (i + 1) << "的电流: " << static_cast<int32_t>(current_values[i]) << std::endl;
+            }
+          }
+          else{
+            std::cerr << "main函数中获取电机电流失败！" << std::endl;
+          }
+          if(Exit()){
+            cout<<"Exit success"<<endl;
           }
           return 0;
       }
     ```
 
-    + void get_motor_current_position(int size);
+    + uint32_t* get_motor_position();
     ```
     函数功能：获取电机位置
-    返回值：无
-    参数：size：电机数量
-    示例：
-      int main()
-      {
-          setIDNUM(2);
-          cout<<"IDNUM="<<IDNUM<<endl;
-          allocate_variable(IDNUM);
-
-          if(login()){
-            cout<<"login success"<<endl;
-          }
-          uint32_t oripos[IDNUM]={0};
-          uint32_t oripos2[IDNUM]{0};
-          set_motor_speed(0,oripos,1,278);
-
-          sleep(2);
-          set_motor_speed(1,oripos2,1,278);
-          get_motor_current();
-          get_motor_current_position(2);
-          deallocate_variable();
-          if(logout()){
-            cout<<"logout success"<<endl;
-          }
-          return 0;
-      }
-    ```
-
-    + std::vector<float> get_motor_speed();
-    ```
-    函数功能：获取电机速度
-    返回值：return speed; // 返回所有电机的速度
+    返回值：return MotorPosition; // 返回电机位置数组
     参数：无
     示例：
       int main()
       {
           setIDNUM(2);
-          cout<<"IDNUM="<<IDNUM<<endl;
-          allocate_variable(IDNUM);
-
-          if(login()){
-            cout<<"login success"<<endl;
+          if(Start()){
+            cout<<"Start success"<<endl;
           }
-          uint32_t oripos[IDNUM]={0};
-          uint32_t oripos2[IDNUM]{0};
-          set_motor_speed(0,oripos,1,278);
+          // 调用 get_motor_position 函数
+          uint32_t* get_positions = get_motor_position();
 
-          sleep(2);
-          set_motor_speed(1,oripos2,1,278);
-          get_motor_current();
-          get_motor_current_position(2);
-          get_motor_speed()；
-          deallocate_variable();
-          if(logout()){
-            cout<<"logout success"<<endl;
+          // 检查返回的指针是否为 nullptr
+          if (get_positions != nullptr)
+          {
+              // 使用 positions 数组
+              for (int i = 0; i < 2; i++)
+              {
+                  std::cout << "main函数中电机" << (i + 1) << "的位置: " << static_cast<int32_t>(get_positions[i]) << std::endl;
+              }
+          }
+          else
+          {
+              std::cerr << "main函数中获取电机位置失败！" << std::endl;
+          }
+          if(Exit()){
+            cout<<"Exit success"<<endl;
+          }
+          return 0;
+      }
+    ```
+
+    + uint32_t* get_motor_speed();
+    ```
+    函数功能：获取电机速度
+    返回值：return MotorSpeed; // 返回所有电机的速度
+    参数：无
+    示例：
+      int main()
+      {
+          setIDNUM(2);
+          if(Start()){
+            cout<<"Start success"<<endl;
+          }
+          uint32_t* speed_values = get_motor_speed();
+          if(speed_values != nullptr)
+          {
+              for (int i = 0; i < 2; i++)
+              {
+                  std::cout << "main函数中电机" << (i + 1) << "的速度: " << static_cast<int32_t>(speed_values[i]) << std::endl;
+              }
+          }
+          else{
+              std::cerr << "main函数中获取电机速度失败！" << std::endl;
+          }
+
+          if(Exit()){
+            cout<<"Exit success"<<endl;
           }
           return 0;
       }
