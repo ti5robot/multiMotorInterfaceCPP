@@ -309,26 +309,20 @@ sort: 1
 ### 1.4 tool.h
 
 该文件是一些`tool`，具体函数使用及参数请查看该文件。
-+ void setmotorTotal(int newIDNUM);
++ void setmotorTotal(int Total);
 ```
-函数功能：设置IDNUM
+函数功能：设置电机总个数
 返回值：无
-参数：newIDNUM - 新的IDNUM即电机个数
+参数：Total 电机总个数
 示例：
   int main()
 {
-    setmotorTotal(2);//两个IDNUM
-    cout<<"IDNUM="<<IDNUM<<endl;
-    allocate_variable(IDNUM);
-
-    if(login()){
+    setmotorTotal(2);
+    if(Start()){
         cout<<"login success"<<endl;
     }
-    float arr2[2]={2.2,2.2};
-    joint_movement(arr2);
-    deallocate_variable();
-    if(logout()){
-        cout<<"logout success"<<endl;
+    if(Exit()){
+        cout<<"Exit success"<<endl;
     }
 
     return 0;
