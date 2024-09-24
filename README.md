@@ -36,10 +36,10 @@ sort: 1
       writeDebugInfoToFile(__func__, "LogInfo");
   ```
 
-+ void Start();
++ bool Start();
   ```
   函数功能：登录can设备
-  返回值：无
+  返回值：成功返回true，失败返回false
   参数：无
   示例：
       int main()
@@ -51,10 +51,10 @@ sort: 1
       }
   ```
 
-+ void Exit();
++ bool Exit();
     ```
   函数功能：断开can设备，也可以用作清除can设备占用
-  返回值：无
+  返回值：成功返回true，失败返回false
   参数：无
   示例：
       setIDNUM(2);
