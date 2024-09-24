@@ -45,9 +45,13 @@ sort: 1
       int main()
       {
         setIDNUM(2);
-        Start();
+        if(Start()){
+             cout<<"Start success"<<endl;
+         }
         cout<<"程序开始"<<endl;
-        Exit();
+        if(Exit()){
+            cout<<"Exit success"<<endl;
+        }
       }
   ```
 
@@ -57,10 +61,17 @@ sort: 1
   返回值：成功返回true，失败返回false
   参数：无
   示例：
-      setIDNUM(2);
-      Start();
-      cout<<"程序开始"<<endl;
-      Exit();
+      int main()
+      {
+        setIDNUM(2);
+        if(Start()){
+             cout<<"Start success"<<endl;
+         }
+        cout<<"程序开始"<<endl;
+        if(Exit()){
+            cout<<"Exit success"<<endl;
+        }
+      }
   ```
 
 + int get_motor_error_status(int size);
