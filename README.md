@@ -49,7 +49,7 @@ sort: 1
              cout<<"Start success"<<endl;
          }
         cout<<"程序开始"<<endl;
-        if(Exit()){
+        if(Exit()){  //断开can设备连接
             cout<<"Exit success"<<endl;
         }
         return 0;
