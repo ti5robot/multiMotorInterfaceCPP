@@ -92,6 +92,7 @@ sort: 1
            setmotorTotal(2);  //设置电机总个数为2个
            Start();  //初始化can设备
            int num = get_motor_error_status(6);  //调用get_motor_error_status函数获取电机错误状态
+           cout<<"num: "<<num<<endl;
            Exit();  //断开can设备连接
            return 0;
        }
