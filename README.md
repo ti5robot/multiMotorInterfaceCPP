@@ -4,7 +4,9 @@ sort: 1
 
 # SDK介绍
 
-运行环境ubuntu22.04；can分析仪为：can分析仪（创芯科技）linux版
+运行环境ubuntu22.04
+
+can分析仪为：can分析仪（创芯科技）linux版
 
 机械臂控制的代码中，分别是`include`，`src`，`log`以及`usrlib`。
 
