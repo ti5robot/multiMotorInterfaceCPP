@@ -354,7 +354,7 @@ can分析仪为：can分析仪（创芯科技）linux版
 + `将usrlib中的libcontrolcan.so  libmylibscan.so  libmylibti5_multi_motor.so文件拷贝到/usr/lib/下`
 
 ```bash
-cd ~/multi_motor/usrlib
+cd ~/multiMotorInterfaceCPP/usrlib
 sudo cp * /usr/lib
 ```
 
