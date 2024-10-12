@@ -15,8 +15,6 @@ public:
 //parameterList：存放参数值 parameterType: 参数类型（见下表）  nodeCount:电机个数 （关节长度）nodeList：存放电机（关节）具体节点,id:1-6
     bool getParameter(uint32_t *parameterList, int parameterType,int nodeCount);
     bool getParameter(uint8_t *nodeList,uint32_t *parameterList, int parameterType,int nodeCount);
-    bool getParameter(int *parameterList, int parameterType,int nodeCount);
-    bool getParameter(int8_t *nodeList,int *parameterList, int parameterType,int nodeCount);
     bool setParameter(uint32_t *parameterList, int parameterType,int nodeCount);
     bool setParameter(uint8_t *nodeList,uint32_t *parameterList, int parameterType,int nodeCount);    // 设置Reduction ratio减速比
     /***
@@ -29,7 +27,7 @@ public:
      bool setRobotParameter(float *parameterList,int parameterType,int nodeCount);
      bool setRobotParameter(uint8_t *nodeList,float *parameterList,int parameterType,int nodeCount);
      bool getRobotParameter(float *parameterList, int parameterType,int nodeCount);
-     bool getRobotParameter(uint8_t *nodeList,float *parameterList, int parameterType,int nodeCount);
+    bool getRobotParameter(uint8_t *nodeList,float *parameterList, int parameterType,int nodeCount);
 
  // bool saveParameter();
 private:

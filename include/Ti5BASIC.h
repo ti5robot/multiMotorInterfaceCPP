@@ -27,7 +27,9 @@ extern float scale;
 extern float j2p;
 extern float NMAX;
 
+extern int8_t *canidList_new;
 extern uint8_t *canidList;
+
 extern uint32_t *reg_position_kp; // 位置环比例
 extern uint32_t *reg_position_kd; // 位置环微分
 
@@ -52,6 +54,7 @@ extern uint32_t *ele_status; // 电机状态
 extern uint32_t *MotorSpeed;  // 电机速度
 
 extern uint32_t *MotorPosition; // 电机当前位置
+extern int32_t *MotorPosition_new; // 电机目标位置
 
 extern "C"
 {
@@ -76,22 +79,21 @@ extern "C"
     // bool brake(int size); 
 
     /*获取电机错误状态
-        参数：
-            size：电机数量
-        返回值：为电机错误
-        0：无错误
-        1：软件错误
-        2：过压
-        4：欠压
-        16：启动错误
+        参数：无
+        返回值：为电机错误数组
+            0：无错误
+            1：软件错误
+            2：过压
+            4：欠压
+            16：启动错误
     */
-    int get_motor_error_status(int size);
+    uint32_t* get_motor_error_status();
 
     /*清除电机错误
-        参数：
-            size：电机数量
+        参数：无
+        返回值：无
     */
-    void clear_motor_errors(int size);
+    void clear_motor_errors();
 
     // 写入调试信息到文件
     void writeDebugInfoToFile(const char *func_name, const char *info);
@@ -117,9 +119,10 @@ extern "C"
     /*
     获取电机位置
         参数：无
-        返回值：电机位置数组
+        返回值：电机位置数组( 转化为减速机角度公式：(返回值/65536/减速比)*360 )
     */
     uint32_t* get_motor_position();
+    // int32_t* get_motor_position_new();//改为有符号类型的getParameter
 
     /*获取电机速度
         参数：无
@@ -131,7 +134,7 @@ extern "C"
         参数:
             motorIds 要设置的对应电机
             motorCount 电机数量
-            targetPositions 电机目标电流
+            targetPositions 电机目标电流，单位：毫安ma
         返回值：成功返回true，失败返回false
     */
     bool set_motor_current(int* motorIds,  int motorCount,uint32_t* current);
@@ -140,7 +143,7 @@ extern "C"
         参数:
             motorIds 要设置的对应电机
             motorCount 电机数量
-            targetPositions 电机目标速度(下发参数为：(目标转速（度每秒）*减速比*100)/360)
+            targetPositions 电机目标速度，单位：rpm(下发参数为：(目标转速（度每秒）*减速比*100)/360)
         返回值：成功返回true，失败返回false
     */
     bool set_motor_speed(int* motorIds,  int motorCount,uint32_t* speed);

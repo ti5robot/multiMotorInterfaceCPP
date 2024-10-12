@@ -18,10 +18,9 @@ public:
 
     void setCanID(int canID){ tControlCAN->setCanID(canID);}
 
-    int readRobotParameter(int requestType, float &recieveData);
-    int readParameter(int requestType, int32_t &recieveData);
-    int setParameter(int requestType, int32_t &recieveData);
-    int setRobotParameter(int robotType, float &recieveData);
+    int readParameter(uint8_t requestType, int32_t &recieveData);
+    int setParameter(uint8_t requestType, int32_t &recieveData);
+
 
     int getStatus();
     int getErrorStatus();
