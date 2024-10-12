@@ -6,6 +6,8 @@ sort: 1
 
 运行环境ubuntu22.04
 
+can分析仪为：can分析仪（创芯科技）linux版
+
 机械臂控制的代码中，分别是`include`，`src`，`log`以及`usrlib`。
 
 + include存储着机械臂所需的头文件。
@@ -352,7 +354,7 @@ sort: 1
 + `将usrlib中的libcontrolcan.so  libmylibscan.so  libmylibti5_multi_motor.so文件拷贝到/usr/lib/下`
 
 ```bash
-cd ~/multi_motor/usrlib
+cd ~/multiMotorInterfaceCPP/usrlib
 sudo cp * /usr/lib
 ```
 
